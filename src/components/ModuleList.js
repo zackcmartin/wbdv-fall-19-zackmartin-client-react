@@ -1,14 +1,14 @@
 import React from 'react'
 import ModuleListItem from "./ModuleListItem";
 
-const ModuleList = ({course}) =>
+const ModuleList = ({modules}) =>
     <div>
         <ul className="list-group">
             {
-                course.modules.map(module =>
-                    <ModuleListItem
-                        key={module.id}
-                        module={module}/>
+                modules.map(module =>
+                        <ModuleListItem
+                            key={module.id}
+                            module={module}/>
                 )
             }
         </ul>

@@ -5,7 +5,7 @@ import CourseEditor from "./containers/CourseEditor"
 function App() {
   return (
     <div className="container">
-        <CourseEditor/>
+        <CourseTable/>
     </div>
   );
 }
