@@ -1,11 +1,10 @@
 import React from 'react';
-import CourseTable from "./containers/CourseTable"
-import CourseEditor from "./containers/CourseEditor"
+import Whiteboard from "./components/Whiteboard"
 
 function App() {
   return (
     <div className="container">
-        <CourseTable/>
+        <Whiteboard/>
     </div>
   );
 }
