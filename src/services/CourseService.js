@@ -15,10 +15,10 @@ export default class CouserService {
         return courses
     }
 
-    // createCourse(title, Id) {
-
-    //     courses.push(course)
-    // }
+    createCourse(newCourse) {
+        courses.push(newCourse)
+        return courses
+    }
 
     findCourseById(courseId) {
         for (var i = 0; i < courses.length; i++){

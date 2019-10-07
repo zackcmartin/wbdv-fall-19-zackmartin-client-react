@@ -198,19 +198,19 @@ export default class CourseEditor extends React.Component {
     }
 
     createTopic = (newTopic) => {
-        if(this.state.topics !== undefined){
-        this.setState(prevState => ({
-            topics: [
-                ...prevState.topics,
-                newTopic
-            ]
-        }))
-    }
-    else{
-        this.setState({
-            topics: [newTopic]
-        })
-    }
+        if (this.state.topics !== undefined) {
+            this.setState(prevState => ({
+                topics: [
+                    ...prevState.topics,
+                    newTopic
+                ]
+            }))
+        }
+        else {
+            this.setState({
+                topics: [newTopic]
+            })
+        }
     }
 
 
@@ -237,11 +237,13 @@ export default class CourseEditor extends React.Component {
 
 
 
+
+
     render() {
         return (
             <div className="container-full-width">
                 <Navbar bg="dark" variant="dark" style={{ color: "white" }}>
-                    <h2>Course Editor {this.props.match.params.courseId}</h2>
+                    <h2>Course Editor  -  {this.props.match.params.courseId}</h2>
                 </Navbar>
                 <div className="row">
                     <div className="col-3">

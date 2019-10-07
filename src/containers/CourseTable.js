@@ -32,16 +32,13 @@ export default class CourseTable extends React.Component {
         })
 
     createCourse = () =>
-        this.setState(prevState => ({
+        this.setState({
+            courses: this.courseService.createCourse(this.state.newCourse),
             newCourse: {
                 title: '',
                 id: ''
-            },
-            courses: [
-                ...prevState.courses,
-                prevState.newCourse
-            ]
-        }))
+            }
+        })
 
 
     titleChanged = (event) => {
