@@ -36,6 +36,7 @@
         }
 
         createModule = () => {
+            isEdit = false;
             this.props.createModule(this.state.newModule)
             this.setState(prevState => ({
                 newModule: {
@@ -51,18 +52,18 @@
             this.setState({
                 newModule: {
                     title: module.title,
-                    id: module.id
+                    id: (new Date()).getTime()
                 }
             })
         }
         completeEditModule = () => {
             if (isEdit) {
                 this.props.completeEditModule(this.state.newModule.title, editedModuleId)
-                this.setState(prevState => ({
+                this.setState({
                     newModule: {
                         title: ''
                     }
-                }))
+                })
                 isEdit = false;
             }
         }

@@ -69,7 +69,7 @@ export default class CourseTable extends React.Component {
                             Line
                     </Nav.Link>
                     </Nav>
-                    <Form inline className="pull-right">
+                    <Form inline>
                         <FormControl type="text" value={this.state.newCourse.title} onChange={this.titleChanged} placeholder="New Course Title" className="mr-sm-2" />
                         <Button onClick={this.createCourse} variant="outline-info">Add</Button>
                     </Form>

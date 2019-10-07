@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button'
 
 let courseService = CourseService.getInstance()
 
+let editedTopicId
+let isEdit = false;
 
 export default class TopicPillsContainer
     extends React.Component {
@@ -19,7 +21,6 @@ export default class TopicPillsContainer
                 title: '',
                 id: ''
             },
-            topics: this.props.topics
         }
     }
 
@@ -35,6 +36,7 @@ export default class TopicPillsContainer
 
 
     createTopic = () => {
+        isEdit = false;
         this.props.createTopic(this.state.newTopic)
         this.setState(prevState => ({
             newTopic: {
@@ -43,24 +45,40 @@ export default class TopicPillsContainer
         }))
     }
 
-    
+    completeEditTopic = () => {
+        if (isEdit) {
+            this.props.completeEditTopic(this.state.newTopic.title, editedTopicId)
+            this.setState({
+                newTopic: {
+                    title: ''
+                }
+            })
+            isEdit = false;
+        }
+    }
+
+    editTopic = (topic) => {
+        isEdit = true;
+        editedTopicId = topic.id
+        this.setState({
+            newTopic: {
+                title: topic.title,
+                id: (new Date()).getTime()
+            }
+        })
+    }
+
 
 
     render() {
         return (
             <div>
-                <ul className="list-group">
-                    <li className="list-group-item">
-                        <Form inline className="float-right">
-                            <FormControl type="text" value={this.state.newTopic.title} onChange={this.titleChanged} placeholder="New Topic" className="mr-sm-2" />
-                            <Button onClick={this.createTopic}>Add</Button>
-                        </Form>
-                    </li>
-                    <li className="list-group-item">
-                    <TopicPills topics={this.props.topics} />
-                </li>
-                </ul>
-            </div > 
+                <Form inline className="float-right">
+                    <FormControl type="text" value={this.state.newTopic.title} onChange={this.titleChanged} placeholder="New Topic" className="mr-sm-2" />
+                    <Button onClick={this.createTopic}>Add</Button>
+                </Form>
+                <TopicPills topics={this.props.topics} deleteTopic={this.props.deleteTopic} editTopic={this.editTopic} completeEditTopic={this.completeEditTopic} />
+            </div >
         )
     }
 }

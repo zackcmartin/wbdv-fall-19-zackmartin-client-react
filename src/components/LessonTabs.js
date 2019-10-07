@@ -10,24 +10,23 @@ library.add(faEdit);
 library.add(faCheck);
 
 
-const LessonTabs = ({ lessons }) =>
+const LessonTabs = ({ lessons, selectLesson, editLesson, completeEditLesson, deleteLesson}) =>
     <div>
         <ul className="nav nav-tabs">
             {
-
                 lessons !== undefined &&
                 lessons.map(lesson =>
                     <li key={lesson.id} className="nav-item">
-                        <a className={lesson.selected ? 'nav-link active' : 'nav-link'} href="#">
+                        <a className={lesson.selected ? 'nav-link active' : 'nav-link'} href="#" onClick={() => selectLesson(lesson)}>
                             {lesson.title}
                         </a>
-                        <button className="btn">
+                        <button className="btn" onClick={() => deleteLesson(lesson)}>
                             <FontAwesomeIcon icon="trash-alt" />
                         </button>
-                        <button className="btn">
+                        <button className="btn" onClick={() => editLesson(lesson)}>
                             <FontAwesomeIcon icon="edit" />
                         </button>
-                        <button className="btn">
+                        <button className="btn" onClick={() => completeEditLesson()}>
                             <FontAwesomeIcon icon="check" />
                         </button>
                     </li>

@@ -20,8 +20,7 @@ export default class LessonsTabsContainer
             newLesson: {
                 title: '',
                 id: ''
-            },
-            lessons: this.props.lessons
+            }
         }
     }
 
@@ -37,22 +36,22 @@ export default class LessonsTabsContainer
 
 
     createLesson = () => {
+        isEdit = false;
         this.props.createLesson(this.state.newLesson)
-        this.setState(prevState => ({
+        this.setState({
             newLesson: {
                 title: ''
             }
-        }))
+        })
     }
 
     editLesson = (lesson) => {
         isEdit = true;
         editedLessonId = lesson.id
-        console.log(editedLessonId)
         this.setState({
             newLesson: {
                 title: lesson.title,
-                id: lesson.id
+                id: (new Date()).getTime()
             }
         })
     }
@@ -75,12 +74,14 @@ export default class LessonsTabsContainer
                 <ul className="list-group">
                     <li className="list-group-item">
                         <Form inline className="float-right">
-                            <FormControl type="text" value={this.state.newLesson.title} onChange={this.titleChanged} placeholder="New Lesson Title" className="mr-sm-2" />
+                            <FormControl type="text" value={this.state.newLesson.title} onChange={this.titleChanged} placeholder="New Lesson" className="mr-sm-2" />
                             <Button onClick={this.createLesson}>Add</Button>
                         </Form>
                     </li>
                     <li className="list-group-item">
-                    <LessonTabs lessons={this.props.lessons} />
+                    <LessonTabs lessons={this.props.lessons} selectLesson={this.props.selectLesson} 
+                    editLesson={this.editLesson} completeEditLesson={this.completeEditLesson}
+                    deleteLesson={this.props.deleteLesson}/>
                 </li>
                 </ul>
             </div > 
