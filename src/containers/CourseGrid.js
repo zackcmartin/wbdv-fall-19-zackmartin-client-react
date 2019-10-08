@@ -83,7 +83,7 @@ export default class CourseGrid extends React.Component {
                   deleteCourse={this.deleteCourse}
                   course={course}
                   key={course.id} />
-                </div>
+              </div>
             )
           }
         </div>
