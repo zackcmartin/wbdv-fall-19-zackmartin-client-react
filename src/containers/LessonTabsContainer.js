@@ -79,12 +79,12 @@ export default class LessonsTabsContainer
                         </Form>
                     </li>
                     <li className="list-group-item">
-                    <LessonTabs lessons={this.props.lessons} selectLesson={this.props.selectLesson} 
-                    editLesson={this.editLesson} completeEditLesson={this.completeEditLesson}
-                    deleteLesson={this.props.deleteLesson}/>
-                </li>
+                        <LessonTabs lessons={this.props.lessons} selectLesson={this.props.selectLesson}
+                            editLesson={this.editLesson} completeEditLesson={this.completeEditLesson}
+                            deleteLesson={this.props.deleteLesson} />
+                    </li>
                 </ul>
-            </div > 
+            </div >
         )
     }
 }
