@@ -5,8 +5,6 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 
-let courseService = CourseService.getInstance()
-
 let editedTopicId
 let isEdit = false;
 
@@ -14,8 +12,6 @@ export default class TopicPillsContainer
     extends React.Component {
     constructor(props) {
         super(props)
-        // this.titleChanged = this.titleChanged.bind(this)
-        // this.createModule = this.createModule.bind(this)
         this.state = {
             newTopic: {
                 title: '',
@@ -25,7 +21,6 @@ export default class TopicPillsContainer
     }
 
     titleChanged = (event) => {
-        // this.state.newModule.title = event.currentTarget.value
         this.setState({
             newTopic: {
                 title: event.currentTarget.value,

@@ -2,6 +2,7 @@ import React from 'react'
 
 import CourseTable from '../containers/CourseTable'
 import CourseEditor from '../containers/CourseEditor'
+import CourseGrid from '../containers/CourseGrid'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 class WhiteBoard extends React.Component {
@@ -12,6 +13,10 @@ class WhiteBoard extends React.Component {
                     <Route
                         path="/courses"
                         component={CourseTable}/>
+
+                    <Route
+                        path="/coursesGrid"
+                        component={CourseGrid}/>
 
                     <Route
                         path="/editor/:courseId"

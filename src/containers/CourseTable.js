@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faBars, faTh } from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom'
 library.add(faBars);
 library.add(faTh);
 
@@ -59,9 +60,11 @@ export default class CourseTable extends React.Component {
                     </button>
                     <Navbar.Brand href="#home">Course Manager</Navbar.Brand>
                     <Nav className="mr-auto">
-                        <Nav.Link href="#grid">
-                            <FontAwesomeIcon icon="th" />
-                        </Nav.Link>
+                        <Link to={`/coursesGrid`}>
+                            <Nav.Link href="#grid">
+                                <FontAwesomeIcon icon="th" />
+                            </Nav.Link>
+                        </Link>
                         <Nav.Link href="#line">
                             Line
                     </Nav.Link>

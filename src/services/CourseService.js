@@ -57,6 +57,13 @@ export default class CouserService {
     }
 
     updateCourse(courseId, course) {
-        // ...
+        for (var i = 0; i < courses.length; i++){
+            // look for the entry with a matching `code` value
+            if (courses[i].id == courseId){
+               courses.splice(i, 1)
+               courses.push(course)
+            }
+          }
+        return courses
     }
 }

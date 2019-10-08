@@ -1,5 +1,4 @@
 import React from 'react'
-//import LessonTabs from "./LessonTabs";
 import ModuleListContainer from "./ModuleListContainer";
 import CourseService from "../services/CourseService"
 import LessonTabsContainer from "./LessonTabsContainer"
