@@ -24,8 +24,24 @@ library.add(faTrashAlt);
 
 const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget, repositionWidgets }) =>
     <div>
+        <br/>
         <h2>Widget list</h2>
-        <button onClick={addWidget}>Add Widget</button>
+        <div className="row">
+            <div className="col-sm-4">
+                <button onClick={addWidget} className="btn btn-primary" style={{width:200}}>Add Widget</button>
+            </div>
+            <div className="col-sm-6" >
+                <button className="btn btn-success float-right" style={{width: 200}}>Save</button>
+            </div>
+            <div className="col-sm-2">
+                <div class="form-check float-right" style={{paddingTop: 10, width: 100}}>
+                    <input class="form-check-input" type="checkbox" value="" id="check"/>
+                    <label class="form-check-label" for="check" style={{color: 'teal', fontSize: 25}}>
+                        Preview
+            </label>
+                </div>
+            </div>
+        </div>
         <ul className="list-group">
             {
                 widgets.map(function (widget, index) {
@@ -33,9 +49,9 @@ const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget, r
                         index++;
                         return <div>
                             <li className="list-group-item">
-                                <div class="float-right">
-                                    <div class="row">
-                                        <div class="col-sm-4">
+                                <div className="float-right">
+                                    <div className="row">
+                                        <div className="col-sm-4">
                                             <select class="form-control" value={widget.type} onChange={(e) => updateWidget({ ...widget, type: e.target.value })}>
                                                 <option value="HEADING">Heading</option>
                                                 <option value="LIST">List</option>
@@ -45,12 +61,12 @@ const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget, r
                                             </select>
                                         </div>
 
-                                        <div class="col-sm-4">
+                                        <div className="col-sm-4">
                                             <button className="btn btn-info" onClick={() => repositionWidgets(widget, "down")}>
                                                 <FontAwesomeIcon icon="arrow-down"></FontAwesomeIcon>
                                             </button>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div className="col-sm-4">
                                             <button className="btn btn-danger" onClick={() => deleteWidget(widget.id)}>
                                                 <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
                                             </button>
@@ -71,9 +87,9 @@ const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget, r
                         index = 0;
                         return <div>
                             <li className="list-group-item">
-                                <div class="float-right">
-                                    <div class="row">
-                                        <div class="col-sm-4">
+                                <div className="float-right">
+                                    <div className="row">
+                                        <div className="col-sm-4">
                                             <select class="form-control" value={widget.type} onChange={(e) => updateWidget({ ...widget, type: e.target.value })}>
                                                 <option value="HEADING">Heading</option>
                                                 <option value="LIST">List</option>
@@ -83,7 +99,7 @@ const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget, r
                                             </select>
                                         </div>
                                         <div class="col-sm-4">
-                                            <button className="btn btn-info"  onClick={() => repositionWidgets(widget, "up")}>
+                                            <button className="btn btn-info" onClick={() => repositionWidgets(widget, "up")}>
                                                 <FontAwesomeIcon icon="arrow-up"></FontAwesomeIcon>
                                             </button>
                                         </div>
@@ -110,9 +126,9 @@ const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget, r
                         index++;
                         return <div>
                             <li className="list-group-item">
-                                <div class="float-right">
-                                    <div class="row">
-                                        <div class="col-sm-4">
+                                <div className="float-right">
+                                    <div className="row">
+                                        <div className="col-sm-4">
                                             <select class="form-control" value={widget.type} onChange={(e) => updateWidget({ ...widget, type: e.target.value })}>
                                                 <option value="HEADING">Heading</option>
                                                 <option value="LIST">List</option>
