@@ -4,7 +4,6 @@ const HeadingWidget = ({ widget, updateWidget, preview }) => {
     if (!preview) {
         return <div>
             <h1>Heading Widget</h1>
-
             <form>
                 <div class="form-group">
                     <label for="headingText">Text</label>
