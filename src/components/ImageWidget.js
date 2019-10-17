@@ -6,12 +6,15 @@ const ImageWidget = ({ widget, updateWidget, preview }) => {
             <h1>Image Widget</h1>
 
             <form>
+                
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Image URL" value={widget.url} onChange={(e) => updateWidget({ ...widget, url: e.target.value })}></input>
+                <label for="imageURL">URL</label>
+                    <input type="text" class="form-control" id="imageURL" placeholder="Image URL" value={widget.url} onChange={(e) => updateWidget({ ...widget, url: e.target.value })}></input>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Widget Name" onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
+                <label for="imageName">Name</label>
+                    <input type="text" class="form-control" id="imageName" placeholder="Widget Name" onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
                 </div>
             </form>
 

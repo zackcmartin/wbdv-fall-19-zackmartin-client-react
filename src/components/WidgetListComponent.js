@@ -122,7 +122,7 @@ const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget, r
                                             </div>
                                         </div>
                                     </div>
-                                    {widget.type === "HEADING" && <HeadingWidget widget={widget} pdateWidget={updateWidget} preview={preview} />}
+                                    {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={updateWidget} preview={preview} />}
                                     {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={updateWidget} preview={preview} />}
                                     {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={updateWidget} preview={preview} />}
                                     {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={updateWidget} preview={preview} />}
