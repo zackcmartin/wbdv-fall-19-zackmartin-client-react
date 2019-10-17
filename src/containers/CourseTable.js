@@ -95,6 +95,7 @@ export default class CourseTable extends React.Component {
                         {
                             this.state.courses.map(course =>
                                 <CourseRow
+                                    key={course.id}
                                     course={course}
                                     deleteCourse={this.deleteCourse}
                                     createCourse={this.createCourse} />

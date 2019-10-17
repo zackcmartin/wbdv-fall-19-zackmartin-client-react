@@ -5,6 +5,14 @@ import LessonTabsContainer from "./LessonTabsContainer"
 import TopicPillsContainer from "./TopicPillsContainer"
 import Navbar from 'react-bootstrap/Navbar'
 
+import WidgetListContainer from "../containers/WidgetListContainer";
+import widgetListReducer from "../reducers/WidgetReducer";
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+
+const store = createStore(widgetListReducer)
+
+
 export default class CourseEditor extends React.Component {
 
     constructor(props) {
@@ -259,6 +267,11 @@ export default class CourseEditor extends React.Component {
                                 <TopicPillsContainer topics={this.state.topics} createTopic={this.createTopic} deleteTopic={this.deleteTopic}
                                     completeEditTopic={this.completeEditTopic} />
                             </li>
+                        </ul>
+                        <ul className="list-group">
+                            <Provider store={store}>
+                                <WidgetListContainer />
+                            </Provider>
                         </ul>
                     </div>
                 </div>
