@@ -8,11 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
 
 library.add(faArrowUp);
 library.add(faArrowDown);
-
+library.add(faTrashAlt);
 
 // const generateDefault = ({ type, widget, updateWidget }) => {
 //     console.log("here")
@@ -41,24 +42,28 @@ const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget })
                                         <option value="LINK">HyperLink</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-4">
-                                    <button className="btn btn-primary">
+                                <div class="col-sm-2">
+                                    <button className="btn btn-info">
                                         <FontAwesomeIcon icon="arrow-up"></FontAwesomeIcon>
                                     </button>
                                 </div>
-                                <div class="col-sm-4">
-                                    <button className="btn btn-primary">
+                                <div class="col-sm-2">
+                                    <button className="btn btn-info">
                                         <FontAwesomeIcon icon="arrow-down"></FontAwesomeIcon>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button className="btn btn-danger" onClick={() => deleteWidget(widget.id)}>
+                                        <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={updateWidget} />}
-                        {widget.type === "LIST" && <ListWidget widget={widget} />}
-                        {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} />}
-                        {widget.type === "IMAGE" && <ImageWidget widget={widget} />}
+                        {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={updateWidget} />}
+                        {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={updateWidget} />}
+                        {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={updateWidget}/>}
                         {widget.type === "LINK" && <LinkWidget widget={widget} />}
-                        <button onClick={() => deleteWidget(widget.id)}>Delete</button>
                     </li>
                 )
             }
