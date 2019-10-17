@@ -5,7 +5,8 @@ const initialState = {
         { type: "PARAGRAPH", text: "Hello from Redux paragraph", name: "", id: 345 },
         { type: "IMAGE", url: "http://lorempixel.com/300/150/", name: "", id: 456 },
         { type: "LINK", url: "https://www.facebook.com", text: "Link Widget", name: "", id: 567 }
-    ]
+    ],
+    preview: false
 }
 
 
@@ -16,7 +17,8 @@ const widgetListReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'DELETE_WIDGET':
             return {
-                widgets: state.widgets.filter(widget => widget.id !== action.widgetId)
+                widgets: state.widgets.filter(widget => widget.id !== action.widgetId),
+                preview: state.preview
             }
         case 'CREATE_WIDGET':
             return {
@@ -28,7 +30,8 @@ const widgetListReducer = (state = initialState, action) => {
                         text: 'New Heading',
                         id: (new Date()).getTime()
                     }
-                ]
+                ],
+                preview: state.preview
             }
         case 'UPDATE_WIDGET':
             console.log(action.widget);
@@ -47,11 +50,13 @@ const widgetListReducer = (state = initialState, action) => {
                     else {
                         return widget;
                     }
-                })
+                }),
+                preview: state.preview
             }
 
         case 'REPOSITION_WIDGETS':
             if (action.direction == "up") {
+                console.log(state)
                 var indexOf = state.widgets.indexOf(action.widget)
                 var newWidgets = []
                 for (var i = 0; i < state.widgets.length; i++) {
@@ -65,7 +70,8 @@ const widgetListReducer = (state = initialState, action) => {
                     }
                 }
                 return {
-                    widgets: [...newWidgets]
+                    widgets: [...newWidgets],
+                    preview: state.preview
                 }
             }
             else if (action.direction == "down") {
@@ -82,9 +88,24 @@ const widgetListReducer = (state = initialState, action) => {
                     }
                 }
                 return {
-                    widgets: [...newWidgets]
+                    widgets: [...newWidgets],
+                    preview: state.preview
                 }
             }
+
+            case 'TOGGLE_PREVIEW':
+                if(state.preview){
+                    return {
+                        widgets: [...state.widgets],
+                        preview: false
+                    }
+                }
+                else{
+                    return {
+                        widgets: [...state.widgets],
+                        preview: true
+                    }
+                }
         default:
             return state
     }

@@ -4,7 +4,8 @@ import {connect} from 'react-redux'
 
 const stateToPropertyMapper = state => {
     return {
-        widgets: state.widgets
+        widgets: state.widgets,
+        preview: state.preview
     }
 }
 
@@ -21,6 +22,9 @@ const dispatcherToPropertyMapper = dispatch => {
         },
         repositionWidgets: (widget, direction) => {
             dispatch({type: 'REPOSITION_WIDGETS', widget: widget, direction: direction})
+        },
+        togglePreview: () => {
+            dispatch({type: 'TOGGLE_PREVIEW'})
         }
     }
 }
