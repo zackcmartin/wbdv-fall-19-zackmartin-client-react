@@ -3,7 +3,7 @@ import React from 'react'
 const ImageWidget = ({ widget, updateWidget, preview }) => {
     if (!preview) {
         return <div>
-            <h1>Image Widget</h1>
+            <h1>Image Widget</h1>ƒ
 
             <form>
                 

@@ -39,7 +39,6 @@ export default class CouserService {
 
     findLessonsById(courseId){
         let course = this.findCourseById(courseId)
-        console.log(course)
         try{
             return course.modules.lessons[0]
         }

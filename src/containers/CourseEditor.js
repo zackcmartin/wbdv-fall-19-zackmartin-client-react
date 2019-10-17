@@ -187,7 +187,6 @@ export default class CourseEditor extends React.Component {
             }))
         }
         else {
-            console.log(newLesson)
             this.setState({
                 lessons: [newLesson]
             })

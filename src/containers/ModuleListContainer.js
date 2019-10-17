@@ -42,7 +42,6 @@ export default class ModuleListContainer
     editModule = (module) => {
         isEdit = true;
         editedModuleId = module.id
-        console.log(editedModuleId)
         this.setState({
             newModule: {
                 title: module.title,

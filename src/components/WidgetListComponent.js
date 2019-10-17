@@ -15,12 +15,6 @@ library.add(faArrowUp);
 library.add(faArrowDown);
 library.add(faTrashAlt);
 
-// const generateDefault = ({ type, widget, updateWidget }) => {
-//     console.log("here")
-//     switch(type) {
-//         case 'HEADING': updateWidget({...widget, type: "HEADING", size: 3, text: "Heading Widget from Redux"});
-//     }
-// }
 
 const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget, repositionWidgets, togglePreview, preview }) =>
     <div>
@@ -133,8 +127,6 @@ const WidgetListComponent = ({ widgets, addWidget, deleteWidget, updateWidget, r
                         }
 
                         else {
-                            console.log(widgets.length)
-                            console.log(index)
                             index++;
                             return <div>
                                 <li className="list-group-item">

@@ -12,8 +12,6 @@ const initialState = {
 
 const widgetListReducer = (state = initialState, action) => {
 
-    console.log(action)
-
     switch (action.type) {
         case 'DELETE_WIDGET':
             return {
@@ -34,7 +32,6 @@ const widgetListReducer = (state = initialState, action) => {
                 preview: state.preview
             }
         case 'UPDATE_WIDGET':
-            console.log(action.widget);
             return {
                 widgets: state.widgets.map(widget => {
                     if (widget.id == action.widget.id && widget.type != action.widget.type) {
@@ -56,7 +53,6 @@ const widgetListReducer = (state = initialState, action) => {
 
         case 'REPOSITION_WIDGETS':
             if (action.direction == "up") {
-                console.log(state)
                 var indexOf = state.widgets.indexOf(action.widget)
                 var newWidgets = []
                 for (var i = 0; i < state.widgets.length; i++) {
@@ -93,19 +89,19 @@ const widgetListReducer = (state = initialState, action) => {
                 }
             }
 
-            case 'TOGGLE_PREVIEW':
-                if(state.preview){
-                    return {
-                        widgets: [...state.widgets],
-                        preview: false
-                    }
+        case 'TOGGLE_PREVIEW':
+            if (state.preview) {
+                return {
+                    widgets: [...state.widgets],
+                    preview: false
                 }
-                else{
-                    return {
-                        widgets: [...state.widgets],
-                        preview: true
-                    }
+            }
+            else {
+                return {
+                    widgets: [...state.widgets],
+                    preview: true
                 }
+            }
         default:
             return state
     }

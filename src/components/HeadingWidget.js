@@ -11,7 +11,7 @@ const HeadingWidget = ({ widget, updateWidget, preview }) => {
                     <input type="text" class="form-control" placeholder="Heading Text" id="headingText" value={widget.text} onChange={(e) => updateWidget({ ...widget, text: e.target.value })}></input>
                 </div>
                 <div class="form-group">
-                <label for="headingSize">Size</label>
+                    <label for="headingSize">Size</label>
                     <select class="form-control" value={widget.size} id="headingSize" onChange={(e) => updateWidget({ ...widget, size: parseInt(e.target.value) })}>
                         <option value="1">Heading 1</option>
                         <option value="2">Heading 2</option>
