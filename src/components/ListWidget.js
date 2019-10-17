@@ -22,6 +22,7 @@ const ListWidget = ({widget, updateWidget}) =>
         </form> 
 
 
+        <h2>Preview</h2>
         {!widget.ordered &&
         <ul>
             {

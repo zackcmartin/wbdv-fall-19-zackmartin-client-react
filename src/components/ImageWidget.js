@@ -14,7 +14,7 @@ const ImageWidget = ({ widget, updateWidget }) =>
             </div>
         </form> 
 
-
+        <h2>Preview</h2>
         <img className="card-img-top"
             src={widget.url} />
     </div>

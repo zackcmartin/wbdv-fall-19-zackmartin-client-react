@@ -17,9 +17,11 @@ const dispatcherToPropertyMapper = dispatch => {
             dispatch({type: 'DELETE_WIDGET', widgetId: id})
         },
         updateWidget: widget => {
-            console.log(widget);
             dispatch({type: 'UPDATE_WIDGET', widget: widget})
         },
+        repositionWidgets: (widget, direction) => {
+            dispatch({type: 'REPOSITION_WIDGETS', widget: widget, direction: direction})
+        }
     }
 }
 
