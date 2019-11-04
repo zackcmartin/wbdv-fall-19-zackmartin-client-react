@@ -9,7 +9,6 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { ReactComponent } from '*.svg';
 
 
 library.add(faArrowUp);
@@ -20,6 +19,7 @@ library.add(faTrashAlt);
 class WidgetListComponent extends React.Component { //({ widgets, addWidget, deleteWidget, updateWidget, repositionWidgets, togglePreview, preview }) =>
     constructor(props) {
         super(props)
+        this.props.findAllWidgets()
     }
 
     render() {
@@ -47,7 +47,7 @@ class WidgetListComponent extends React.Component { //({ widgets, addWidget, del
                 <ul className="list-group">
                     {
                         this.props.widgets.map(function (widget, index) {
-                            if (preview) {
+                            if (this.props.preview) {
                                 return <div>
                                     <li className="list-group-item">
                                         {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
@@ -81,7 +81,7 @@ class WidgetListComponent extends React.Component { //({ widgets, addWidget, del
                                                         </button>
                                                     </div>
                                                     <div className="col-sm-4">
-                                                        <button className="btn btn-danger" onClick={() => deleteWidget(widget.id)}>
+                                                        <button className="btn btn-danger" onClick={() => this.props.deleteWidget(widget.id)}>
                                                             <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
                                                         </button>
                                                     </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import ModuleLittContainer from "./ModuleListContainer";
+import ModuleListContainer from "./ModuleListContainer";
 import CourseService from "../services/CourseService"
 import LessonTabsContainer from "./LessonTabsContainer"
 import TopicPillsContainer from "./TopicPillsContainer"
