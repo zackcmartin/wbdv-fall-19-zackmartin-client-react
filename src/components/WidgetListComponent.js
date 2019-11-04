@@ -19,12 +19,152 @@ library.add(faTrashAlt);
 class WidgetListComponent extends React.Component { //({ widgets, addWidget, deleteWidget, updateWidget, repositionWidgets, togglePreview, preview }) =>
     constructor(props) {
         super(props)
-        this.props.findAllWidgets();
+        // this.renderWidgets = this.renderWidgets.bind(this);
+        //     this.props.findAllWidgets();
+        //    console.log("CONSTRUCTOR" + this.props.widgets)
     }
+
+    componentDidMount() {
+        this.props.findAllWidgets()
+    }
+
+     renderWidgets = (widget, index) => {
+        if (this.props.preview) {
+            return <div>
+                <li className="list-group-item">
+                    {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                    {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                    {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                    {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                    {widget.type === "LINK" && <LinkWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                </li>
+                <br />
+            </div>
+        }
+        else {
+            if (index == 0) {
+                index++;
+                return <div>
+                    <li className="list-group-item">
+                        <div className="float-right">
+                            <div className="row">
+                                <div className="col-sm-4">
+                                    <select class="form-control" value={widget.type} onChange={(e) => this.props.updateWidget({ ...widget, type: e.target.value })}>
+                                        <option value="HEADING">Heading</option>
+                                        <option value="LIST">List</option>
+                                        <option value="PARAGRAPH">Paragraph</option>
+                                        <option value="IMAGE">Image</option>
+                                        <option value="LINK">HyperLink</option>
+                                    </select>
+                                </div>
+                                <div className="col-sm-4">
+                                    <button className="btn btn-info" onClick={() => this.props.repositionWidgets(widget, "down")}>
+                                        <FontAwesomeIcon icon="arrow-down"></FontAwesomeIcon>
+                                    </button>
+                                </div>
+                                <div className="col-sm-4">
+                                    <button className="btn btn-danger" onClick={() => this.props.deleteWidget(widget.id)}>
+                                        <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} />}
+                        {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "LINK" && <LinkWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                    </li>
+                    <br />
+                </div>
+            }
+
+            else if ((this.props.widgets.length - 1) == index) {
+                index = 0;
+                return <div>
+                    <li className="list-group-item">
+                        <div className="float-right">
+                            <div className="row">
+                                <div className="col-sm-4">
+                                    <select class="form-control" value={widget.type} onChange={(e) => this.props.updateWidget({ ...widget, type: e.target.value })}>
+                                        <option value="HEADING">Heading</option>
+                                        <option value="LIST">List</option>
+                                        <option value="PARAGRAPH">Paragraph</option>
+                                        <option value="IMAGE">Image</option>
+                                        <option value="LINK">HyperLink</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button className="btn btn-info" onClick={() => this.props.repositionWidgets(widget, "up")}>
+                                        <FontAwesomeIcon icon="arrow-up"></FontAwesomeIcon>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button className="btn btn-danger" onClick={() => this.props.deleteWidget(widget.id)}>
+                                        <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "LINK" && <LinkWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                    </li>
+                    <br />
+                </div>
+            }
+
+            else {
+                index++;
+                return <div>
+                    <li className="list-group-item">
+                        <div className="float-right">
+                            <div className="row">
+                                <div className="col-sm-4">
+                                    <select class="form-control" value={widget.type} onChange={(e) => this.props.updateWidget({ ...widget, type: e.target.value })}>
+                                        <option value="HEADING">Heading</option>
+                                        <option value="LIST">List</option>
+                                        <option value="PARAGRAPH">Paragraph</option>
+                                        <option value="IMAGE">Image</option>
+                                        <option value="LINK">HyperLink</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <button className="btn btn-info" onClick={() => this.props.repositionWidgets(widget, "up")}>
+                                        <FontAwesomeIcon icon="arrow-up"></FontAwesomeIcon>
+                                    </button>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button className="btn btn-info" onClick={() => this.props.repositionWidgets(widget, "down")}>
+                                        <FontAwesomeIcon icon="arrow-down"></FontAwesomeIcon>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button className="btn btn-danger" onClick={() => this.props.deleteWidget(widget.id)}>
+                                        <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                        {widget.type === "LINK" && <LinkWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
+                    </li>
+                    <br />
+                </div>
+            }
+        }
+    }
+
+
 
     render() {
         return (
-
             <div>
                 <br />
                 <h2>Widget list</h2>
@@ -46,147 +186,17 @@ class WidgetListComponent extends React.Component { //({ widgets, addWidget, del
                 </div>
                 <ul className="list-group">
                     {
-                        this.props.widgets && this.props.widgets.map(function (widget, index) {
-                            if (this.props.preview) {
-                                return <div>
-                                    <li className="list-group-item">
-                                        {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                        {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                        {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                        {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                        {widget.type === "LINK" && <LinkWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                    </li>
-                                    <br />
-                                </div>
-                            }
-                            else {
-                                if (index == 0) {
-                                    index++;
-                                    return <div>
-                                        <li className="list-group-item">
-                                            <div className="float-right">
-                                                <div className="row">
-                                                    <div className="col-sm-4">
-                                                        <select class="form-control" value={widget.type} onChange={(e) => this.props.updateWidget({ ...widget, type: e.target.value })}>
-                                                            <option value="HEADING">Heading</option>
-                                                            <option value="LIST">List</option>
-                                                            <option value="PARAGRAPH">Paragraph</option>
-                                                            <option value="IMAGE">Image</option>
-                                                            <option value="LINK">HyperLink</option>
-                                                        </select>
-                                                    </div>
-                                                    <div className="col-sm-4">
-                                                        <button className="btn btn-info" onClick={() => this.props.repositionWidgets(widget, "down")}>
-                                                            <FontAwesomeIcon icon="arrow-down"></FontAwesomeIcon>
-                                                        </button>
-                                                    </div>
-                                                    <div className="col-sm-4">
-                                                        <button className="btn btn-danger" onClick={() => this.props.deleteWidget(widget.id)}>
-                                                            <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "LINK" && <LinkWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                        </li>
-                                        <br />
-                                    </div>
-                                }
-
-                                else if ((this.props.widgets.length - 1) == index) {
-                                    index = 0;
-                                    return <div>
-                                        <li className="list-group-item">
-                                            <div className="float-right">
-                                                <div className="row">
-                                                    <div className="col-sm-4">
-                                                        <select class="form-control" value={widget.type} onChange={(e) => this.props.updateWidget({ ...widget, type: e.target.value })}>
-                                                            <option value="HEADING">Heading</option>
-                                                            <option value="LIST">List</option>
-                                                            <option value="PARAGRAPH">Paragraph</option>
-                                                            <option value="IMAGE">Image</option>
-                                                            <option value="LINK">HyperLink</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <button className="btn btn-info" onClick={() => this.props.repositionWidgets(widget, "up")}>
-                                                            <FontAwesomeIcon icon="arrow-up"></FontAwesomeIcon>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <button className="btn btn-danger" onClick={() => this.props.deleteWidget(widget.id)}>
-                                                            <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "LINK" && <LinkWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                        </li>
-                                        <br />
-                                    </div>
-                                }
-
-                                else {
-                                    index++;
-                                    return <div>
-                                        <li className="list-group-item">
-                                            <div className="float-right">
-                                                <div className="row">
-                                                    <div className="col-sm-4">
-                                                        <select class="form-control" value={widget.type} onChange={(e) => this.props.updateWidget({ ...widget, type: e.target.value })}>
-                                                            <option value="HEADING">Heading</option>
-                                                            <option value="LIST">List</option>
-                                                            <option value="PARAGRAPH">Paragraph</option>
-                                                            <option value="IMAGE">Image</option>
-                                                            <option value="LINK">HyperLink</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <button className="btn btn-info" onClick={() => this.props.repositionWidgets(widget, "up")}>
-                                                            <FontAwesomeIcon icon="arrow-up"></FontAwesomeIcon>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <button className="btn btn-info" onClick={() => this.props.repositionWidgets(widget, "down")}>
-                                                            <FontAwesomeIcon icon="arrow-down"></FontAwesomeIcon>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <button className="btn btn-danger" onClick={() => this.props.deleteWidget(widget.id)}>
-                                                            <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {widget.type === "HEADING" && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "LIST" && <ListWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "IMAGE" && <ImageWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                            {widget.type === "LINK" && <LinkWidget widget={widget} updateWidget={this.props.updateWidget} preview={this.props.preview} />}
-                                        </li>
-                                        <br />
-                                    </div>
-                                }
-                            }
-
-                        })
+                        this.props.widgets && this.props.widgets.map((widget, index) => (
+                            this.renderWidgets(widget, index)
+                        ))
                     }
                 </ul>
             </div>
-
         )
 
-
     }
+
+
 }
 
 export default WidgetListComponent;

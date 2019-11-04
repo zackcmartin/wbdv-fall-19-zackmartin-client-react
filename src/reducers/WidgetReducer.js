@@ -15,26 +15,18 @@ const widgetListReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'FIND_ALL_WIDGETS':
             return{
-                widgets: action.widgets
+                widgets: action.widgets,
+                preview: state.preview
             }
-
 
         case 'DELETE_WIDGET':
             return {
-                widgets: state.widgets.filter(widget => widget.id !== action.widgetId),
+                widgets: action.widgets,
                 preview: state.preview
             }
         case 'CREATE_WIDGET':
             return {
-                widgets: [
-                    ...state.widgets,
-                    {
-                        type: 'HEADING',
-                        size: 1,
-                        text: 'New Heading',
-                        id: (new Date()).getTime()
-                    }
-                ],
+                widgets: action.widgets,
                 preview: state.preview
             }
         case 'UPDATE_WIDGET':

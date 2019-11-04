@@ -20,6 +20,19 @@ class WidgetService {
             method: 'DELETE'
         })
         .then(response => response.json())
+
+    createWidget = () => 
+    fetch("http://localhost:8080/api/widgets" , {
+        method: 'POST',
+        body: JSON.stringify({ type: "HEADING", size: 1, text: "Heading Widget", name: "", id: (new Date()).getTime() % 100 }),
+        headers:{
+            'content-type':'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Credentials':true,
+            'Access-Control-Allow-Origin':true
+            },
+    })
+    .then(response => response.json())
 }
 
 export default WidgetService

@@ -6,19 +6,19 @@ import WidgetService from '../services/WidgetService'
 const service = WidgetService.getInstance();
 
 const stateToPropertyMapper = state => {
+    console.log("MAPPER" + state.widgets);
     return {
         widgets: state.widgets,
         preview: state.preview
     }
 }
 
-const dispatcherToPropertyMapper = dispatch => {
-    return {
+const propsToDispatcher = dispatch => ({
         addWidget: () => {
-            dispatch({ type: 'CREATE_WIDGET' })
+            service.createWidget().then(widgets => dispatch({ type: 'CREATE_WIDGET', widgets: widgets }))
         },
         deleteWidget: (id) => {
-            dispatch({ type: 'DELETE_WIDGET', widgetId: id })
+            service.deleteWidget(id).then(widgets => dispatch({ type: 'DELETE_WIDGET', widgets: widgets }))
         },
         updateWidget: widget => {
             dispatch({ type: 'UPDATE_WIDGET', widget: widget })
@@ -32,12 +32,11 @@ const dispatcherToPropertyMapper = dispatch => {
         findAllWidgets: () => {
             service.findAllWidgets().then(widgets => dispatch({type: 'FIND_ALL_WIDGETS', widgets: widgets}))
         }
-    }
-}
+    })
 
 const WidgetListContainer =
     connect(stateToPropertyMapper,
-        dispatcherToPropertyMapper)
+        propsToDispatcher)
         (WidgetListComponent)
 
 export default WidgetListContainer;
