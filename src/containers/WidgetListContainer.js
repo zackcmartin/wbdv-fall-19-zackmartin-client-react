@@ -1,6 +1,9 @@
 import React from 'react'
 import WidgetListComponent from "../components/WidgetListComponent";
 import { connect } from 'react-redux'
+import WidgetService from '../services/WidgetService'
+
+const service = WidgetService.getInstance();
 
 const stateToPropertyMapper = state => {
     return {
@@ -25,6 +28,10 @@ const dispatcherToPropertyMapper = dispatch => {
         },
         togglePreview: () => {
             dispatch({ type: 'TOGGLE_PREVIEW' })
+        },
+        findAllWidgets: () => {
+            service.findAllWidgets().then(widgets => dispatch({type: 'FIND_ALL_WIDGETS', widgets: widgets}))
+            dispatch({type: 'FIND_ALL_WIDGETS'})
         }
     }
 }

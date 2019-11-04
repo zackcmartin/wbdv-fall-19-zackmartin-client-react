@@ -1,10 +1,10 @@
 const initialState = {
     widgets: [
-        { type: "HEADING", size: 3, text: "Heading Widget", name: "", id: 234 },
-        { type: "LIST", ordered: false, text: "List\nWidget", name: "", id: 123 },
-        { type: "PARAGRAPH", text: "Paragraph Widget", name: "", id: 345 },
-        { type: "IMAGE", url: "http://lorempixel.com/300/150/", name: "", id: 456 },
-        { type: "LINK", url: "https://www.facebook.com", text: "Link Widget", name: "", id: 567 }
+        // { type: "HEADING", size: 3, text: "Heading Widget", name: "", id: 234 },
+        // { type: "LIST", ordered: false, text: "List\nWidget", name: "", id: 123 },
+        // { type: "PARAGRAPH", text: "Paragraph Widget", name: "", id: 345 },
+        // { type: "IMAGE", url: "http://lorempixel.com/300/150/", name: "", id: 456 },
+        // { type: "LINK", url: "https://www.facebook.com", text: "Link Widget", name: "", id: 567 }
     ],
     preview: false
 }
@@ -13,6 +13,12 @@ const initialState = {
 const widgetListReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case 'FIND_ALL_WIDGETS':
+            return{
+                widgets: action.widgets
+            }
+
+
         case 'DELETE_WIDGET':
             return {
                 widgets: state.widgets.filter(widget => widget.id !== action.widgetId),
