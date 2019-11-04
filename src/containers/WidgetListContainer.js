@@ -31,7 +31,6 @@ const dispatcherToPropertyMapper = dispatch => {
         },
         findAllWidgets: () => {
             service.findAllWidgets().then(widgets => dispatch({type: 'FIND_ALL_WIDGETS', widgets: widgets}))
-            dispatch({type: 'FIND_ALL_WIDGETS'})
         }
     }
 }

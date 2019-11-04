@@ -19,7 +19,7 @@ library.add(faTrashAlt);
 class WidgetListComponent extends React.Component { //({ widgets, addWidget, deleteWidget, updateWidget, repositionWidgets, togglePreview, preview }) =>
     constructor(props) {
         super(props)
-        this.props.findAllWidgets()
+        this.props.findAllWidgets();
     }
 
     render() {
@@ -46,7 +46,7 @@ class WidgetListComponent extends React.Component { //({ widgets, addWidget, del
                 </div>
                 <ul className="list-group">
                     {
-                        this.props.widgets.map(function (widget, index) {
+                        this.props.widgets && this.props.widgets.map(function (widget, index) {
                             if (this.props.preview) {
                                 return <div>
                                     <li className="list-group-item">
