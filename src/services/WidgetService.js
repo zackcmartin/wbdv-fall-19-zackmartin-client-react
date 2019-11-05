@@ -33,6 +33,26 @@ class WidgetService {
             },
     })
     .then(response => response.json())
+
+    updateWidget = widget =>
+    fetch(`http://localhost:8080/api/widgets/${widget.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(widget),
+        headers:{
+            'content-type':'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Credentials':true,
+            'Access-Control-Allow-Origin':true
+            },
+    }).then(response => response.json())
+
+    findWidgetById = id =>
+    fetch(`http://localhost:8080/api/widgets/${id}`)
+        .then(response => response.json)
+
+
+
+
 }
 
 export default WidgetService

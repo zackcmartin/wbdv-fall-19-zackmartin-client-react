@@ -21,7 +21,7 @@ const propsToDispatcher = dispatch => ({
             service.deleteWidget(id).then(widgets => dispatch({ type: 'DELETE_WIDGET', widgets: widgets }))
         },
         updateWidget: widget => {
-            dispatch({ type: 'UPDATE_WIDGET', widget: widget })
+            service.updateWidget(widget).then(widgets => dispatch({ type: 'UPDATE_WIDGET', widgets: widgets }))
         },
         repositionWidgets: (widget, direction) => {
             dispatch({ type: 'REPOSITION_WIDGETS', widget: widget, direction: direction })

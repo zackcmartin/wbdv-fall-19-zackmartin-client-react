@@ -31,22 +31,24 @@ const widgetListReducer = (state = initialState, action) => {
             }
         case 'UPDATE_WIDGET':
             return {
-                widgets: state.widgets.map(widget => {
-                    if (widget.id == action.widget.id && widget.type != action.widget.type) {
-                        switch (action.widget.type) {
-                            case 'HEADING': return { type: "HEADING", size: 1, text: "", name: action.widget.name, id: action.widget.id }
-                            case 'LIST': return { type: "LIST", ordered: false, text: "", name: action.widget.name, id: action.widget.id }
-                            case 'PARAGRAPH': return { type: "PARAGRAPH", text: "", name: action.widget.name, id: action.widget.id }
-                            case 'IMAGE': return { type: "IMAGE", url: "", name: action.widget.name, id: action.widget.id }
-                            case 'LINK': return { type: "LINK", url: "", text: "", name: action.widget.name, id: action.widget.id }
-                        }
-                    }
-                    else if (widget.id == action.widget.id) { return action.widget; }
-                    else {
-                        return widget;
-                    }
-                }),
+                widgets: action.widgets,
                 preview: state.preview
+                // widgets: state.widgets.map(widget => {
+                //     if (widget.id == action.widget.id && widget.type != action.widget.type) {
+                //         switch (action.widget.type) {
+                //             case 'HEADING': return { type: "HEADING", size: 1, text: "", name: action.widget.name, id: action.widget.id }
+                //             case 'LIST': return { type: "LIST", ordered: false, text: "", name: action.widget.name, id: action.widget.id }
+                //             case 'PARAGRAPH': return { type: "PARAGRAPH", text: "", name: action.widget.name, id: action.widget.id }
+                //             case 'IMAGE': return { type: "IMAGE", url: "", name: action.widget.name, id: action.widget.id }
+                //             case 'LINK': return { type: "LINK", url: "", text: "", name: action.widget.name, id: action.widget.id }
+                //         }
+                //     }
+                //     else if (widget.id == action.widget.id) { return action.widget; }
+                //     else {
+                //         return widget;
+                //     }
+                // }),
+                // preview: state.preview
             }
 
         case 'REPOSITION_WIDGETS':
