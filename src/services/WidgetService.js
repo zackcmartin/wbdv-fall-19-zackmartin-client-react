@@ -24,7 +24,7 @@ class WidgetService {
     createWidget = () => 
     fetch("https://wbdv-f19-zmartin-java-server.herokuapp.com/api/widgets" , {
         method: 'POST',
-        body: JSON.stringify({ type: "HEADING", size: 1, text: "Heading Widget", name: "", id: (new Date()).getTime() % 100 }),
+        body: JSON.stringify({ type: "HEADING", size: 1, text: "", name: "", id: (new Date()).getTime() % 100 }),
         headers:{
             'content-type':'application/json',
             'Accept': 'application/json',
