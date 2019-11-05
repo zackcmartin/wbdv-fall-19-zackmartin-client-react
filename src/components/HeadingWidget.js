@@ -19,7 +19,7 @@ const HeadingWidget = ({ widget, updateWidget, preview }) => {
                 </div>
                 <div class="form-group">
                     <label for="headingName">Name</label>
-                    <input type="text" class="form-control" placeholder="Widget Name" id="headingName" onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
+                    <input type="text" class="form-control" placeholder="Widget Name" id="headingName" value={widget.name} onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
                 </div>
             </form>
 

@@ -26,6 +26,7 @@ class WidgetListComponent extends React.Component { //({ widgets, addWidget, del
 
     componentDidMount() {
         this.props.findAllWidgets()
+        console.log("HERE" + this.props.widgets)
     }
 
      renderWidgets = (widget, index) => {

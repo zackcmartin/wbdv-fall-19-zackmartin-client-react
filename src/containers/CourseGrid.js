@@ -18,9 +18,8 @@ library.add(faTh);
 export default class CourseGrid extends React.Component {
   constructor(props) {
     super(props)
-    this.courseService = CourseService.getInstance()
     this.state = {
-      courses: this.courseService.findAllCourses(),
+      courses: [],
       newCourse: {
         title: '',
         id: ''
@@ -28,26 +27,26 @@ export default class CourseGrid extends React.Component {
     }
   }
 
-  deleteCourse = courseId =>
-    this.setState({
-      courses: this.courseService.deleteCourse(courseId)
-    })
+  componentDidMount() {
+    let courseService = CourseService.getInstance()
+    courseService.findAllCourses().then(courses => this.setState({ courses: courses, newCourse: { title: '', id: '' } }))
+    console.log("mounting " + this.state.courses)
+  }
 
-  createCourse = () =>
-    this.setState({
-      courses: this.courseService.createCourse(this.state.newCourse),
-      newCourse: {
-        title: '',
-        id: ''
-      }
-    })
-
-
+  deleteCourse = courseId => {
+    let courseService = CourseService.getInstance()
+    courseService.deleteCourse(courseId).then(courses => this.setState({ courses: courses }))
+    console.log("deleted " + this.state.courses)
+  }
+  createCourse = () => {
+    let courseService = CourseService.getInstance()
+    courseService.createCourse(this.state.newCourse).then(courses => this.setState({ courses: courses, newCourse: { title: '', id: '' } }))
+  }
   titleChanged = (event) => {
     this.setState({
       newCourse: {
         title: event.currentTarget.value,
-        id: (new Date()).getTime()
+        id: (new Date()).getTime() % 100
       }
     })
   }
@@ -64,7 +63,7 @@ export default class CourseGrid extends React.Component {
             <Nav.Link href="#grid">
               <FontAwesomeIcon icon="th" />
             </Nav.Link>
-            <Link to={`/courses`}>
+            <Link to={`/`}>
               <Nav.Link href="#line">
                 Line
       </Nav.Link>

@@ -12,48 +12,48 @@ import { faBars, faTh } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom'
 library.add(faBars);
 library.add(faTh);
-
-
+ 
+ 
 export default class CourseTable extends React.Component {
     constructor(props) {
         super(props)
-        this.courseService = CourseService.getInstance()
         this.state = {
-            courses: this.courseService.findAllCourses(),
+            courses: [],
             newCourse: {
                 title: '',
                 id: ''
             }
         }
     }
-
-    deleteCourse = courseId =>
-        this.setState({
-            courses: this.courseService.deleteCourse(courseId)
-        })
-
-    createCourse = () =>
-        this.setState({
-            courses: this.courseService.createCourse(this.state.newCourse),
-            newCourse: {
-                title: '',
-                id: ''
-            }
-        })
-
-
+ 
+    componentDidMount() {
+        let courseService = CourseService.getInstance()
+        courseService.findAllCourses().then(courses => this.setState({ courses: courses, newCourse: {title: '', id: ''}}))
+        console.log("mounting " + this.state.courses)
+    }
+ 
+    deleteCourse = courseId => {
+        let courseService = CourseService.getInstance()
+        courseService.deleteCourse(courseId).then(courses => this.setState({ courses: courses }))
+        console.log("deleted " + this.state.courses)
+    }
+    createCourse = () => {
+            let courseService = CourseService.getInstance()
+            courseService.createCourse(this.state.newCourse).then(courses => this.setState({ courses: courses, newCourse: {title: '', id: ''}}))
+    }
     titleChanged = (event) => {
         this.setState({
             newCourse: {
                 title: event.currentTarget.value,
-                id: (new Date()).getTime()
+                id: (new Date()).getTime() % 100
             }
         })
     }
-
+ 
     render() {
         return (
             <div>
+                {console.log("rendering " + this.state.courses)}
                 <Navbar bg="dark" variant="dark">
                     <button className="btn hamburgerStyle wbdv-field wbdv-hamburger">
                         <FontAwesomeIcon icon="bars" />

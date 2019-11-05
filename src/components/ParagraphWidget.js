@@ -11,7 +11,7 @@ const ParagraphWidget = ({ widget, updateWidget, preview }) => {
                 </div>
                 <div class="form-group">
                 <label for="paraName">Name</label>
-                    <input type="text" class="form-control" id="paraName" placeholder="Widget Name" onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
+                    <input type="text" class="form-control" id="paraName" placeholder="Widget Name" value={widget.name} onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
                 </div>
             </form>
             <h2>Preview</h2>

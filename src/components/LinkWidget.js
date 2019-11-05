@@ -18,7 +18,7 @@ const LinkWidget = ({ widget, updateWidget, preview }) => {
 
                 <div class="form-group">
                     <label for="imageName">Name</label>
-                    <input type="text" class="form-control" id="imageName" placeholder="Widget Name" onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
+                    <input type="text" class="form-control" id="imageName" placeholder="Widget Name" value={widget.name} onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
                 </div>
             </form>
 

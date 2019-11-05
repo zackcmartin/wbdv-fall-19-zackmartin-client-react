@@ -21,7 +21,7 @@ const ListWidget = ({ widget, updateWidget, preview }) => {
 
                 <div class="form-group">
                     <label for="listName">Name</label>
-                    <input type="text" class="form-control" id="listName" placeholder="Widget Name" onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
+                    <input type="text" class="form-control" id="listName" placeholder="Widget Name" value={widget.name} onChange={(e) => updateWidget({ ...widget, name: e.target.value })}></input>
                 </div>
             </form>
 

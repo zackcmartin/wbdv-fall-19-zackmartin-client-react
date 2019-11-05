@@ -11,58 +11,42 @@ export default class CouserService {
         return this.myInstance
     }
 
-    findAllCourses() {
-        return courses
-    }
+    findAllCourses = () =>
+        fetch("http://localhost:8080/api/courses")
+            .then(response => response.json())  
 
-    createCourse(newCourse) {
-        courses.push(newCourse)
-        return courses
-    }
+    deleteCourse = cid =>
+        fetch(`http://localhost:8080/api/courses/${cid}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
 
-    findCourseById(courseId) {
-        for (var i = 0; i < courses.length; i++){
-            // look for the entry with a matching `code` value
-            if (courses[i].id == courseId){
-               return courses[i];
-            }
-          }
-    }
+    createCourse = (course) =>
+        fetch("http://localhost:8080/api/courses", {
+            method: 'POST',
+            body: JSON.stringify(course),
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Origin': true
+            },
+        })
+            .then(response => response.json())
 
-    findModulesById(courseId){
-         let course = this.findCourseById(courseId)
-         try{
-             return course.modules
-         }
-         catch{}
-    }
+    updateCourse = course =>
+        fetch(`http://localhost:8080/api/courses/${course.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(course),
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Origin': true
+            },
+        }).then(response => response.json())
 
-    findLessonsById(courseId){
-        let course = this.findCourseById(courseId)
-        try{
-            return course.modules.lessons[0]
-        }
-        catch{}
-   }
-
-    deleteCourse(courseId) {
-        for (var i = 0; i < courses.length; i++){
-            // look for the entry with a matching `code` value
-            if (courses[i].id == courseId){
-               courses.splice(i, 1)
-            }
-          }
-        return courses
-    }
-
-    updateCourse(courseId, course) {
-        for (var i = 0; i < courses.length; i++){
-            // look for the entry with a matching `code` value
-            if (courses[i].id == courseId){
-               courses.splice(i, 1)
-               courses.push(course)
-            }
-          }
-        return courses
-    }
+    findCourseById = id =>
+        fetch(`http://localhost:8080/api/courses/${id}`)
+            .then(response => response.json)
 }
