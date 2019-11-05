@@ -12,17 +12,17 @@ export default class CouserService {
     }
 
     findAllCourses = () =>
-        fetch("http://localhost:8080/api/courses")
+        fetch("https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses")
             .then(response => response.json())  
 
     deleteCourse = cid =>
-        fetch(`http://localhost:8080/api/courses/${cid}`, {
+        fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${cid}`, {
             method: 'DELETE'
         })
             .then(response => response.json())
 
     createCourse = (course) =>
-        fetch("http://localhost:8080/api/courses", {
+        fetch("https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses", {
             method: 'POST',
             body: JSON.stringify(course),
             headers: {
@@ -35,7 +35,7 @@ export default class CouserService {
             .then(response => response.json())
 
     updateCourse = course =>
-        fetch(`http://localhost:8080/api/courses/${course.id}`, {
+        fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${course.id}`, {
             method: 'PUT',
             body: JSON.stringify(course),
             headers: {
@@ -47,6 +47,6 @@ export default class CouserService {
         }).then(response => response.json())
 
     findCourseById = id =>
-        fetch(`http://localhost:8080/api/courses/${id}`)
+        fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${id}`)
             .then(response => response.json)
 }
