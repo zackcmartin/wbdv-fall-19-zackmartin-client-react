@@ -11,18 +11,18 @@ class WidgetService {
         return this.myInstance;
     }
 
-    findAllWidgets = () =>
-    fetch("http://localhost:8080/api/widgets")
+    findAllWidgets = (courseId, moduleId) =>
+    fetch(`http://localhost:8080/api/courses/${courseId}/modules/${moduleId}/widgets`)
         .then(response => response.json())
 
-    deleteWidget = wid =>
-        fetch(`http://localhost:8080/api/widgets/${wid}`, {
+    deleteWidget = (cid, mid, wid) =>
+        fetch(`http://localhost:8080/api/courses/${cid}/modules/${mid}/widgets/${wid}`, {
             method: 'DELETE'
         })
         .then(response => response.json())
 
-    createWidget = () => 
-    fetch("http://localhost:8080/api/widgets", {
+    createWidget = (cid, mid) => 
+    fetch(`http://localhost:8080/api/courses/${cid}/modules/${mid}/widgets`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -35,10 +35,10 @@ class WidgetService {
     })
         .then(response => response.json())
 
-    updateWidget = widget =>
-    fetch(`http://localhost:8080/api/widgets/${widget.id}`, {
+    updateWidget = (cid, mid, editedWidget) =>
+    fetch(`http://localhost:8080/api/courses/${cid}/modules/${mid}/widgets/${editedWidget.id}`, {
         method: 'PUT',
-        body: JSON.stringify(widget),
+        body: JSON.stringify(editedWidget),
         headers:{
             'content-type':'application/json',
             'Accept': 'application/json',

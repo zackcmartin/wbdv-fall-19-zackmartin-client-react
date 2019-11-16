@@ -23,18 +23,21 @@ class WidgetListComponent extends React.Component { //({ widgets, addWidget, del
 
         const service = CourseService.getInstance()
 
-        const course = service.findCourseById(props.match.params.courseId)
+        console.log(props)
+        //const course = service.findCourseById(props.match.params.courseId)
 
 
-        this.state = {
-            course: course
-        }
+        // this.state = {
+        //     course: course
+        // }
     }
 
-    componentDidMount() {
-        this.props.findAllWidgets()
-        console.log("HERE" + this.props.widgets)
-    }
+    // componentDidMount() {
+    //     this.props.findAllWidgets()
+    //     console.log("HERE" + this.props.widgets)
+    // }
+
+    
 
 
      renderWidgets = (widget, index) => {

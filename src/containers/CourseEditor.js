@@ -2,6 +2,7 @@ import React from 'react'
 import ModuleListContainer from "./ModuleListContainer";
 import CourseService from "../services/CourseService"
 import ModuleService from "../services/ModuleService"
+import WidgetService from "../services/WidgetService"
 import LessonTabsContainer from "./LessonTabsContainer"
 import TopicPillsContainer from "./TopicPillsContainer"
 import Navbar from 'react-bootstrap/Navbar'
@@ -10,8 +11,9 @@ import WidgetListContainer from "../containers/WidgetListContainer";
 import widgetListReducer from "../reducers/WidgetReducer";
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
+import WidgetListComponent from '../components/WidgetListComponent';
 
-const store = createStore(widgetListReducer)
+//const store = createStore(widgetListReducer)
 
 
 export default class CourseEditor extends React.Component {
@@ -26,9 +28,11 @@ export default class CourseEditor extends React.Component {
 
         let modules = []
         let module = ''
+        let moduleId = ''
         let lessons = []
         let lesson = ''
         let topics = []
+        let widgets = []
 
         // try {
         //     modules = course.modules
@@ -87,9 +91,11 @@ export default class CourseEditor extends React.Component {
             course: course,
             modules: modules,
             module: module,
+            moduleId: moduleId,
             lessons: lessons,
             lesson: lesson,
-            topics: topics
+            topics: topics,
+            widgets: widgets
         }
 
         
@@ -118,10 +124,36 @@ export default class CourseEditor extends React.Component {
     }
 
 
+
+
+    deleteWidget= widgetId => {
+        let widgetService = WidgetService.getInstance()
+        widgetService.deleteWidget(this.state.courseId, this.state.moduleId, widgetId).then(widgets => this.setState({ widgets: widgets }))
+    }
+
+    addWidget = () => {
+        console.log("made it to add widget")
+        let widgetService = WidgetService.getInstance()
+        widgetService.createWidget(this.state.courseId, this.state.moduleId).then(widgets => this.setState({ widgets: widgets }))
+    }
+
+    updateWidget = editedWidget => {
+        let widgetService = WidgetService.getInstance()
+        widgetService.updateWidget(this.state.courseId, this.state.moduleId, editedWidget).then(widgets => this.setState({ widgets: widgets }))
+        
+    }
+
+
+
+
+
     selectModule = module => {
+        let widgetService = WidgetService.getInstance()
+        widgetService.findAllWidgets(this.state.courseId, module.id).then(widgets => this.setState({widgets: widgets}))
         try {
             this.setState({
                 module: module,
+                moduleId: module.id,
                 lessons: module.lessons,
                 lesson: module.lessons[0],
                 topics: module.lessons[0].topics
@@ -131,6 +163,7 @@ export default class CourseEditor extends React.Component {
             try {
                 this.setState({
                     module: module,
+                    moduleId: module.id,
                     lessons: module.lessons,
                     lesson: module.lessons[0],
                     topics: []
@@ -139,6 +172,7 @@ export default class CourseEditor extends React.Component {
             catch{
                 this.setState({
                     module: module,
+                    moduleId: module.id,
                     lessons: module.lessons,
                     lesson: [],
                     topics: []
@@ -297,7 +331,8 @@ export default class CourseEditor extends React.Component {
                             </li>
                         </ul>
                         <ul className="list-group">
-                                <WidgetListContainer />
+                              <WidgetListComponent widgets={this.state.widgets} deleteWidget={this.deleteWidget} updateWidget={this.updateWidget}
+                                    addWidget={this.addWidget} preview={false}/>
                         </ul>
                     </div>
                 </div>
