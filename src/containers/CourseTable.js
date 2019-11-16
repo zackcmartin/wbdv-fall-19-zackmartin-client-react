@@ -12,8 +12,8 @@ import { faBars, faTh } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom'
 library.add(faBars);
 library.add(faTh);
- 
- 
+
+
 export default class CourseTable extends React.Component {
     constructor(props) {
         super(props)
@@ -25,21 +25,21 @@ export default class CourseTable extends React.Component {
             }
         }
     }
- 
+
     componentDidMount() {
         let courseService = CourseService.getInstance()
-        courseService.findAllCourses().then(courses => this.setState({ courses: courses, newCourse: {title: '', id: ''}}))
+        courseService.findAllCourses().then(courses => this.setState({ courses: courses, newCourse: { title: '', id: '' } }))
         console.log("mounting " + this.state.courses)
     }
- 
+
     deleteCourse = courseId => {
         let courseService = CourseService.getInstance()
         courseService.deleteCourse(courseId).then(courses => this.setState({ courses: courses }))
         console.log("deleted " + this.state.courses)
     }
     createCourse = () => {
-            let courseService = CourseService.getInstance()
-            courseService.createCourse(this.state.newCourse).then(courses => this.setState({ courses: courses, newCourse: {title: '', id: ''}}))
+        let courseService = CourseService.getInstance()
+        courseService.createCourse(this.state.newCourse).then(courses => this.setState({ courses: courses, newCourse: { title: '', id: '' } }))
     }
     titleChanged = (event) => {
         this.setState({
@@ -49,7 +49,7 @@ export default class CourseTable extends React.Component {
             }
         })
     }
- 
+
     render() {
         return (
             <div>
