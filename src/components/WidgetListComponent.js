@@ -9,6 +9,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import CourseService from '../services/CourseService'
 
 
 library.add(faArrowUp);
@@ -19,15 +20,22 @@ library.add(faTrashAlt);
 class WidgetListComponent extends React.Component { //({ widgets, addWidget, deleteWidget, updateWidget, repositionWidgets, togglePreview, preview }) =>
     constructor(props) {
         super(props)
-        // this.renderWidgets = this.renderWidgets.bind(this);
-        //     this.props.findAllWidgets();
-        //    console.log("CONSTRUCTOR" + this.props.widgets)
+
+        const service = CourseService.getInstance()
+
+        const course = service.findCourseById(props.match.params.courseId)
+
+
+        this.state = {
+            course: course
+        }
     }
 
     componentDidMount() {
         this.props.findAllWidgets()
         console.log("HERE" + this.props.widgets)
     }
+
 
      renderWidgets = (widget, index) => {
         if (this.props.preview) {

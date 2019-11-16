@@ -1,6 +1,7 @@
 import React from 'react'
 import ModuleListContainer from "./ModuleListContainer";
 import CourseService from "../services/CourseService"
+import ModuleService from "../services/ModuleService"
 import LessonTabsContainer from "./LessonTabsContainer"
 import TopicPillsContainer from "./TopicPillsContainer"
 import Navbar from 'react-bootstrap/Navbar'
@@ -21,65 +22,68 @@ export default class CourseEditor extends React.Component {
         const service = CourseService.getInstance()
 
         const course = service.findCourseById(props.match.params.courseId)
+        const courseId = props.match.params.courseId;
+
         let modules = []
         let module = ''
         let lessons = []
         let lesson = ''
         let topics = []
 
-        try {
-            modules = course.modules
-            module = modules[0]
-            lessons = module.lessons
-            lesson = lessons[0]
-            topics = lesson.topics
-        }
-        catch{
-            try {
-                modules = course.modules
-                module = modules[0]
-                lessons = module.lessons
-                lesson = lessons[0]
-                topics = []
-            }
-            catch{
-                try {
-                    modules = course.modules
-                    module = modules[0]
-                    lessons = module.lessons
-                    lesson = ''
-                    topics = []
-                }
-                catch{
-                    try {
-                        modules = course.modules
-                        module = modules[0]
-                        lessons = []
-                        lesson = ''
-                        topics = []
-                    }
-                    catch{
-                        try {
-                            modules = course.modules
-                            module = ''
-                            lessons = []
-                            lesson = ''
-                            topics = []
-                        }
-                        catch{
-                            modules = []
-                            module = ''
-                            lessons = []
-                            lesson = ''
-                            topics = []
-                        }
-                    }
-                }
-            }
-        }
+        // try {
+        //     modules = course.modules
+        //     module = modules[0]
+        //     lessons = module.lessons
+        //     lesson = lessons[0]
+        //     topics = lesson.topics
+        // }
+        // catch{
+        //     try {
+        //         modules = course.modules
+        //         module = modules[0]
+        //         lessons = module.lessons
+        //         lesson = lessons[0]
+        //         topics = []
+        //     }
+        //     catch{
+        //         try {
+        //             modules = course.modules
+        //             module = modules[0]
+        //             lessons = module.lessons
+        //             lesson = ''
+        //             topics = []
+        //         }
+        //         catch{
+        //             try {
+        //                 modules = course.modules
+        //                 module = modules[0]
+        //                 lessons = []
+        //                 lesson = ''
+        //                 topics = []
+        //             }
+        //             catch{
+        //                 try {
+        //                     modules = course.modules
+        //                     module = ''
+        //                     lessons = []
+        //                     lesson = ''
+        //                     topics = []
+        //                 }
+        //                 catch{
+        //                     modules = []
+        //                     module = ''
+        //                     lessons = []
+        //                     lesson = ''
+        //                     topics = []
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
 
         this.state = {
+            courseId: courseId,
             course: course,
             modules: modules,
             module: module,
@@ -87,7 +91,32 @@ export default class CourseEditor extends React.Component {
             lesson: lesson,
             topics: topics
         }
+
+        
     }
+
+     componentDidMount() {
+        let moduleService = ModuleService.getInstance()
+        moduleService.findAllModulesForCourse(this.state.courseId).then(modules => this.setState({modules: modules}))
+     }
+
+    deleteModule = moduleId => {
+        let moduleService = ModuleService.getInstance()
+        moduleService.deleteModule(moduleId, this.state.courseId).then(modules => this.setState({ modules: modules }))
+        console.log("deleted " + this.state.courses)
+    }
+
+    createModule = newModule => {
+        let moduleService = ModuleService.getInstance()
+        moduleService.createModuleForCourse(this.state.courseId, newModule).then(modules => this.setState({ modules: modules }))
+    }
+
+    completeEditModule = editedModule => {
+        let moduleService = ModuleService.getInstance()
+        moduleService.updateModule(this.state.courseId, editedModule).then(modules => this.setState({ modules: modules }))
+        
+    }
+
 
     selectModule = module => {
         try {
@@ -125,43 +154,43 @@ export default class CourseEditor extends React.Component {
         })
     }
 
-    createModule = (newModule) => {
-        if (this.state.modules !== undefined) {
-            this.setState(prevState => ({
-                modules: [
-                    ...prevState.modules,
-                    newModule
-                ]
-            }))
-        }
-        else {
-            this.setState({
-                modules: [newModule]
-            })
-        }
-    }
+    // createModule = (newModule) => {
+    //     if (this.state.modules !== undefined) {
+    //         this.setState(prevState => ({
+    //             modules: [
+    //                 ...prevState.modules,
+    //                 newModule
+    //             ]
+    //         }))
+    //     }
+    //     else {
+    //         this.setState({
+    //             modules: [newModule]
+    //         })
+    //     }
+    // }
 
-    completeEditModule = (moduleTitle, moduleId) => {
-        var modules = [...this.state.modules]
-        for (var i = 0; i < modules.length; i++) {
-            // look for the entry with a matching `code` value
-            if (modules[i].id == moduleId) {
-                modules[i].title = moduleTitle
-                this.setState({
-                    modules: modules
-                })
-            }
-        }
-    }
+    // completeEditModule = (moduleTitle, moduleId) => {
+    //     var modules = [...this.state.modules]
+    //     for (var i = 0; i < modules.length; i++) {
+    //         // look for the entry with a matching `code` value
+    //         if (modules[i].id == moduleId) {
+    //             modules[i].title = moduleTitle
+    //             this.setState({
+    //                 modules: modules
+    //             })
+    //         }
+    //     }
+    // }
 
-    deleteModule = (module) => {
-        var array = [...this.state.modules]; // make a separate copy of the array
-        var index = array.indexOf(module)
-        if (index !== -1) {
-            array.splice(index, 1);
-            this.setState({ modules: array });
-        }
-    }
+    // deleteModule = (module) => {
+    //     var array = [...this.state.modules]; // make a separate copy of the array
+    //     var index = array.indexOf(module)
+    //     if (index !== -1) {
+    //         array.splice(index, 1);
+    //         this.setState({ modules: array });
+    //     }
+    // }
 
 
     completeEditLesson = (lessonTitle, lessonId) => {
@@ -268,9 +297,7 @@ export default class CourseEditor extends React.Component {
                             </li>
                         </ul>
                         <ul className="list-group">
-                            <Provider store={store}>
                                 <WidgetListContainer />
-                            </Provider>
                         </ul>
                     </div>
                 </div>

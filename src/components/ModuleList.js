@@ -1,7 +1,7 @@
 import React from 'react'
 import ModuleListItem from "./ModuleListItem";
 
-const ModuleList = ({modules, selectModule, deleteModule, editModule, completeEditModule}) =>
+const ModuleList = ({modules, moduleId, selectModule, deleteModule, editModule, completeEditModule}) =>
     <div>
         <ul className="list-group">
             {
@@ -10,6 +10,7 @@ const ModuleList = ({modules, selectModule, deleteModule, editModule, completeEd
                         <ModuleListItem
                             key={module.id}
                             module={module}
+                            moduleId={module.id}
                             selectModule={selectModule}
                             deleteModule={deleteModule}
                             editModule={editModule}

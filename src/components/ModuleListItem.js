@@ -16,12 +16,12 @@ let isEdit = false;
 
 
 
-const ModuleListItem = ({module, selectModule, deleteModule, editModule, completeEditModule}) =>
+const ModuleListItem = ({module, moduleId, selectModule, deleteModule, editModule, completeEditModule}) =>
     <li className="list-group-item">
         <button onClick={() => selectModule(module)} className="btn btn-primary btn-block">
             {module.title}
         </button>
-        <button onClick={() => deleteModule(module)} className="btn">
+        <button onClick={() => deleteModule(moduleId)} className="btn">
             <FontAwesomeIcon icon="trash-alt" />
         </button>
         <button onClick={() => editModule(module)} className="btn">

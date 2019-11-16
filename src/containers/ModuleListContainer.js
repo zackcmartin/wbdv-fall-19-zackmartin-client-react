@@ -21,12 +21,22 @@ export default class ModuleListContainer
     }
 
     titleChanged = (event) => {
+        if(isEdit){
+            this.setState({
+                newModule: {
+                    title: event.currentTarget.value,
+                    id: editedModuleId
+                }
+            })
+        }
+        else{
         this.setState({
             newModule: {
                 title: event.currentTarget.value,
-                id: (new Date()).getTime()
+                id: (new Date()).getTime() % 100
             }
         })
+    }
     }
 
     createModule = () => {
@@ -45,13 +55,13 @@ export default class ModuleListContainer
         this.setState({
             newModule: {
                 title: module.title,
-                id: (new Date()).getTime()
+                id: (new Date()).getTime() % 100
             }
         })
     }
     completeEditModule = () => {
         if (isEdit) {
-            this.props.completeEditModule(this.state.newModule.title, editedModuleId)
+            this.props.completeEditModule(this.state.newModule)
             this.setState({
                 newModule: {
                     title: ''
