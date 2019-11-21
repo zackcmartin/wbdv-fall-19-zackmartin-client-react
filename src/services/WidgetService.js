@@ -12,17 +12,17 @@ class WidgetService {
     }
 
     findAllWidgets = (courseId, moduleId) =>
-    fetch(`http://localhost:8080/api/courses/${courseId}/modules/${moduleId}/widgets`)
+    fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${courseId}/modules/${moduleId}/widgets`)
         .then(response => response.json())
 
     deleteWidget = (cid, mid, wid) =>
-        fetch(`http://localhost:8080/api/courses/${cid}/modules/${mid}/widgets/${wid}`, {
+        fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${cid}/modules/${mid}/widgets/${wid}`, {
             method: 'DELETE'
         })
         .then(response => response.json())
 
     createWidget = (cid, mid) => 
-    fetch(`http://localhost:8080/api/courses/${cid}/modules/${mid}/widgets`, {
+    fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${cid}/modules/${mid}/widgets`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -36,7 +36,7 @@ class WidgetService {
         .then(response => response.json())
 
     updateWidget = (cid, mid, editedWidget) =>
-    fetch(`http://localhost:8080/api/courses/${cid}/modules/${mid}/widgets/${editedWidget.id}`, {
+    fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${cid}/modules/${mid}/widgets/${editedWidget.id}`, {
         method: 'PUT',
         body: JSON.stringify(editedWidget),
         headers:{
@@ -48,7 +48,7 @@ class WidgetService {
     }).then(response => response.json())
 
     findWidgetById = id =>
-    fetch(`http://localhost:8080/api/widgets/${id}`)
+    fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/widgets/${id}`)
         .then(response => response.json)
 
 

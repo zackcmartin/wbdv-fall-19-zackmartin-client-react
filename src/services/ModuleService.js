@@ -11,12 +11,12 @@ export default class ModuleService {
     }
 
     findAllModules = () =>
-        fetch("http://localhost:8080/api/modules")
+        fetch("https://wbdv-f19-zmartin-java-server.herokuapp.com/api/modules")
             .then(response => response.json()) 
     
     //
     findAllModulesForCourse = cid =>
-        fetch(`http://localhost:8080/api/courses/${cid}/modules`,{
+        fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${cid}/modules`,{
             headers: {
                 'content-type': 'application/json',
                 'Accept': 'application/json',
@@ -28,14 +28,14 @@ export default class ModuleService {
          
     //
     deleteModule = (mid, cid) =>
-        fetch(`http://localhost:8080/api/courses/${cid}/modules/${mid}`, {
+        fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${cid}/modules/${mid}`, {
             method: 'DELETE'
         })
             .then(response => response.json())
 
     //
     createModuleForCourse = (cid, module) =>
-        fetch(`http://localhost:8080/api/courses/${cid}/modules`, {
+        fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${cid}/modules`, {
             method: 'POST',
             body: JSON.stringify(module),
             headers: {
@@ -48,7 +48,7 @@ export default class ModuleService {
             .then(response => response.json())
 
     updateModule = (cid, editedModule) =>
-        fetch(`http://localhost:8080/api/courses/${cid}/modules/${editedModule.id}`, {
+        fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/courses/${cid}/modules/${editedModule.id}`, {
             method: 'PUT',
             body: JSON.stringify(editedModule),
             headers: {
@@ -60,6 +60,6 @@ export default class ModuleService {
         }).then(response => response.json())
 
     findModuleById = id =>
-        fetch(`http://localhost:8080/api/modules/${id}`)
+        fetch(`https://wbdv-f19-zmartin-java-server.herokuapp.com/api/modules/${id}`)
             .then(response => response.json)
 }
